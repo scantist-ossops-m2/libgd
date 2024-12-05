@@ -142,6 +142,14 @@ void gdImageWebpCtx (gdImagePtr im, gdIOCtx * outfile, int quantization)
 		return;
 	}
 
+	if (overflow2(gdImageSX(im), 4)) {
+		return;
+	}
+
+	if (overflow2(gdImageSX(im) * 4, gdImageSY(im))) {
+		return;
+	}
+
 	argb = (uint8_t *)gdMalloc(gdImageSX(im) * 4 * gdImageSY(im));
 	if (!argb) {
 		return;
